@@ -13,6 +13,17 @@ def crear_y_subir_rama(nombre_rama):
     # Subir la nueva rama a GitHub
     subprocess.run(['git', 'push', 'origin', nombre_rama])
 
+def leer_nombres_de_ramas_desde_archivo(archivo):
+    with open(archivo, 'r') as file:
+        nombres_ramas = [line.strip() for line in file.readlines()]
+    return nombres_ramas
+
 if __name__ == "__main__":
-    nombre_de_rama = "nuevaRama"  # Cambia esto al nombre que desees
-    crear_y_subir_rama(nombre_de_rama)
+    nombre_de_archivo = "branches.txt"
+    
+    # Leer nombres de ramas desde el archivo
+    nombres_de_ramas = leer_nombres_de_ramas_desde_archivo(nombre_de_archivo)
+
+    # Crear y subir cada rama
+    for nombre_rama in nombres_de_ramas:
+        crear_y_subir_rama(nombre_rama)
